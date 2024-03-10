@@ -37,34 +37,32 @@ const EnterStats = ({ label, keyAbility, onChange }) => {
   };
 
   return (
-    <div className="characterAbilities">
-      <div className="abilitiesDiv">
-        <label className="w-full text-1xl font-bold text-[#4e3629]">
-          {label}:
-          <input
-            className="itemInput"
-            type="number"
-            value={value}
-            onChange={handleChange}
-            required
-            min="0"
-          />
+    <div className="abilitiesDiv items-center w-32">
+      <label className="text-1xl font-bold text-[#4e3629] w-auto">
+        {label}:
+        <input
+          className="itemInput"
+          type="number"
+          value={value}
+          onChange={handleChange}
+          required
+          min="0"
+        />
+      </label>
+      <div className="abilitiesClass">
+        <label className="labelDiv">
+          <span>
+            {label} check: {Math.floor((value - 10) / 2)}
+          </span>
         </label>
-        <div className="abilitiesClass">
-          <label className="labelDiv">
-            <span>
-              {label} check: {Math.floor((value - 10) / 2)}
-            </span>
-          </label>
-          <div>
-            <button onClick={handleRollDice}>Roll Dice</button>
-            {/* Conditionally render rolls */}
-            {buttonClicked && (
-              <p>
-                {rolls.join(", ")} + {modifier} =<span>{totalResult}</span>
-              </p>
-            )}
-          </div>
+        <div>
+          <button onClick={handleRollDice}>Roll Dice</button>
+          {/* Conditionally render rolls */}
+          {buttonClicked && (
+            <p>
+              {rolls.join(", ")} + {modifier} =<span>{totalResult}</span>
+            </p>
+          )}
         </div>
       </div>
     </div>

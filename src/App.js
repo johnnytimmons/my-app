@@ -26,41 +26,45 @@ const App = () => {
   useEffect(() => {}, [baseValues]);
 
   return (
-    <div className="container">
+    <div className="wholePage">
       <Navbar />
       <AddCharacter />
-      <div className="container">
-        <h2 className="w-full text-2xl font-bold text-[#4e3629] ">Abilities</h2>
-        <EnterStats
-          label="Strength"
-          keyAbility={"Str"}
-          onChange={(newModifier) => handleStatChange("Str", newModifier)}
-        />
-        <EnterStats
-          label="Dexterity"
-          keyAbility={"Dex"}
-          onChange={(newModifier) => handleStatChange("Dex", newModifier)}
-        />
-        <EnterStats
-          label="Charisma"
-          keyAbility={"Cha"}
-          onChange={(newModifier) => handleStatChange("Cha", newModifier)}
-        />
-        <EnterStats
-          label="Constitution"
-          keyAbility={"Con"}
-          onChange={(newModifier) => handleStatChange("Con", newModifier)}
-        />
-        <EnterStats
-          label="Wisdom"
-          keyAbility={"Wis"}
-          onChange={(newModifier) => handleStatChange("Wis", newModifier)}
-        />
-        <EnterStats
-          label="Intelligence"
-          keyAbility={"Int"}
-          onChange={(newModifier) => handleStatChange("Int", newModifier)}
-        />
+      <div className="m-5 bg-zinc-50 p-5 rounded-br-xl shadow-sm mb-1 text-center flex flex-col justify-center items-center">
+        <h2 className="w-full text-2xl font-bold text-[#4e3629] mb-4">
+          Abilities
+        </h2>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <EnterStats
+            label="Strength"
+            keyAbility={"Str"}
+            onChange={(newModifier) => handleStatChange("Str", newModifier)}
+          />
+          <EnterStats
+            label="Dexterity"
+            keyAbility={"Dex"}
+            onChange={(newModifier) => handleStatChange("Dex", newModifier)}
+          />
+          <EnterStats
+            label="Charisma"
+            keyAbility={"Cha"}
+            onChange={(newModifier) => handleStatChange("Cha", newModifier)}
+          />
+          <EnterStats
+            label="Constitution"
+            keyAbility={"Con"}
+            onChange={(newModifier) => handleStatChange("Con", newModifier)}
+          />
+          <EnterStats
+            label="Wisdom"
+            keyAbility={"Wis"}
+            onChange={(newModifier) => handleStatChange("Wis", newModifier)}
+          />
+          <EnterStats
+            label="Intelligence"
+            keyAbility={"Int"}
+            onChange={(newModifier) => handleStatChange("Int", newModifier)}
+          />
+        </div>
       </div>
     </div>
   );

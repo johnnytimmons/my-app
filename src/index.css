@@ -20,18 +20,26 @@ h1 {
   font-style: normal;
 }
 
+.wholePage {
+  max-width: 520px;
+  margin: 50px auto;
+  margin-top: 0px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+}
 .container {
   max-width: 520px;
   margin: 50px auto;
   margin-top: 0px;
   background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 4px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .abilitiesClass {
@@ -60,11 +68,4 @@ h1 {
     outline: none;
     color: dimgray;
   }
-}
-
-.abilitiesDiv {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
