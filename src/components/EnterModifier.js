@@ -9,15 +9,11 @@ const EnterModifier = ({ label, keyAbility, baseValue }) => {
   const [d20Result, setD20Result] = useState(null);
   const [buttonClicked, setButtonClicked] = useState(false);
 
-  console.log("Base Value:", baseValue);
-
   // Define a function to handle rolling the dice
   const handleRollDice = () => {
     // Update modifier state before rolling the dice
     setModifier(baseValue);
     const { rolls, totalResult } = generalRollDice(1, 20, baseValue); // Roll 1d20 with modifier
-    console.log("Rolls:", rolls); // Log the rolls
-    console.log("Total Result:", totalResult); // Log the totalResult
     setResult(totalResult); // Set totalResult state
     setD20Result(rolls[0]); // Set d20Result state
     setButtonClicked(true); // Set buttonClicked to true after clicking

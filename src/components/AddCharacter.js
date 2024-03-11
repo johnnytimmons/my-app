@@ -1,12 +1,91 @@
-import React from "react";
-const AddCharacter = () => {
+import React, { useState, useEffect } from "react";
+import classOptions from "../utils/classOptions";
+
+const calculateStartingHP = (selectedClass, constitutionModifier) => {
+  const selectedClassOption = classOptions
+    .flatMap((group) => group.options)
+    .find((classOption) => classOption.value === selectedClass);
+
+  const baseHP = selectedClassOption ? selectedClassOption.hpModifier : 0;
+  const adjustedHP = baseHP + constitutionModifier;
+  console.log("Starting HP =", adjustedHP);
+  return adjustedHP;
+};
+const calculateInitiative = (selectedClass, dexterityModifier) => {
+  const selectedClassOption = classOptions
+    .flatMap((group) => group.options)
+    .find((classOption) => classOption.value === selectedClass);
+
+  const baseInit = selectedClassOption ? selectedClassOption.initModifier : 0;
+  const adjustedInit = baseInit + dexterityModifier;
+  console.log("Init Modifier =", adjustedInit);
+  return adjustedInit;
+};
+const AddCharacterContainer = ({ baseValues }) => {
+  const [selectedClass, setSelectedClass] = useState("none");
+  const [startingHP, setStartingHP] = useState(0);
+  const [currentHP, setCurrentHP] = useState(0);
+  const [startingInit, setStartingInit] = useState(0);
+  useEffect(() => {
+    setStartingHP(calculateStartingHP(selectedClass, baseValues.Con));
+  }, [selectedClass, baseValues.Con]);
+
+  useEffect(() => {
+    setCurrentHP(startingHP);
+  }, [startingHP]);
+
+  useEffect(() => {
+    const calculatedInitiative = calculateInitiative(
+      selectedClass,
+      baseValues.Dex
+    );
+    setStartingInit(calculatedInitiative);
+  }, [selectedClass, baseValues.Dex]);
+
+  const handleClassChange = (event) => {
+    const selectedClass = event.target.value;
+    setSelectedClass(selectedClass);
+  };
+
+  const handleHeal = () => {
+    setCurrentHP((prevHP) => prevHP + 1);
+  };
+
+  const handleDamage = () => {
+    setCurrentHP((prevHP) => prevHP - 1);
+  };
+
+  return (
+    <div>
+      <AddCharacter
+        selectedClass={selectedClass}
+        startingHP={startingHP}
+        currentHP={currentHP}
+        startingInit={startingInit}
+        setStartingInit={setStartingInit}
+        onClassChange={handleClassChange}
+        onHeal={handleHeal}
+        onDamage={handleDamage}
+      />
+    </div>
+  );
+};
+
+const AddCharacter = ({
+  selectedClass,
+  startingHP,
+  currentHP,
+  startingInit,
+  setStartingInit,
+  baseValues,
+  onClassChange,
+  onHeal,
+  onDamage,
+}) => {
   return (
     <>
       <div id="wholePage">
-        <div
-          className="container items-centercd my-app
-        "
-        >
+        <div className="container items-centered my-app">
           <form>
             <div className="text-center text-base justify-center" id="CVButton">
               <h2 className="w-full text-2xl font-bold text-[#4e3629]">
@@ -36,13 +115,27 @@ const AddCharacter = () => {
                   Level:
                 </label>
                 <input
-                  className="itemInput w-full bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                  type="text"
+                  className="itemInput w-12 bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
                   type="number"
                   required
                   placeholder="1"
                   min="1"
                   id="characterLevel"
+                />
+              </span>
+              <span className="w-2/3 flex flex-col text-center items-center">
+                <label
+                  htmlFor="proficiency"
+                  className="leading-7 text-base text-gray-600"
+                >
+                  Proficiency Bonus:
+                </label>
+                <input
+                  className="itemInput w-12 bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                  type="number"
+                  id="proficiency"
+                  required
+                  placeholder="2"
                 />
               </span>
             </div>
@@ -61,36 +154,18 @@ const AddCharacter = () => {
                   id="characterClass"
                   required
                   defaultValue="none"
+                  onChange={onClassChange}
                 >
                   <option value="none" disabled hidden>
                     Select a Class
                   </option>
-                  <optgroup label="Core">
-                    <option value="barbarian">Barbarian</option>
-                    <option value="bard">Bard</option>
-                    <option value="cleric">Cleric</option>
-                    <option value="druid">Druid</option>
-                    <option value="fighter">Fighter</option>
-                    <option value="monk">Monk</option>
-                    <option value="paladin">Paladin</option>
-                    <option value="ranger">Ranger</option>
-                    <option value="rogue">Rogue</option>
-                    <option value="sorcerer">Sorcerer</option>
-                    <option value="wizard">Wizard</option>
-                  </optgroup>
-                  <optgroup label="Base">
-                    <option value="alchemist">Alchemist</option>
-                    <option value="cavalier">Cavalier</option>
-                    <option value="gunslinger">Gunslinger</option>
-                    <option value="inquisitor">Inquisitor</option>
-                    <option value="magus">Magus</option>
-                    <option value="oracle">Oracle</option>
-                    <option value="shifter">Shifter</option>
-                    <option value="omdura">Omdura</option>
-                    <option value="summoner">Summoner</option>
-                    <option value="vigilante">Vigilante</option>
-                    <option value="witch">Witch</option>
-                  </optgroup>
+                  {classOptions.map((group) =>
+                    group.options.map((classOption) => (
+                      <option key={classOption.value} value={classOption.value}>
+                        {classOption.label}
+                      </option>
+                    ))
+                  )}
                 </select>
               </span>
               <span className="w-12/24 flex flex-col text-center items-center">
@@ -143,25 +218,58 @@ const AddCharacter = () => {
             </div>
           </form>
           <div
-            className="flex row w-2/3 gap-2 justify-center"
+            className="flex flex-row w-full gap-2 justify-center text-center"
             id="hitClassStack"
           >
-            <span className="flex flex-col text-center items-center">
+            <div className="flex flex-col w-7/12">
               <label
                 htmlFor="hitPoints"
                 className="leading-7 text-base text-gray-600"
               >
-                HP:
+                Hit Points:
               </label>
-              <input
-                className="w-1/2 bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                type="number"
-                required
-                min="0"
-                id="hitPoints"
-              />
-            </span>
-            <span className="flex flex-col items-center text-center">
+              <div className="flex flex-row justify-center gap-1">
+                <div className="buttonContainer flex flex-col items-start text-xs gap-1">
+                  <button
+                    onClick={onHeal}
+                    className="border-2 text-center w-full"
+                  >
+                    Heal
+                  </button>
+                  <button
+                    onClick={onDamage}
+                    className="border-2 text-center w-full px-2"
+                  >
+                    Damage
+                  </button>
+                </div>
+                <div className="flex justify-center text-center items-center">
+                  <input
+                    value={currentHP}
+                    readOnly
+                    className="w-12 text-base text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                    type="number"
+                    required
+                    min="0"
+                    id="hitPoints"
+                  />
+                  <span className="ml-2 text-base text-gray-600">
+                    {" "}
+                    /
+                    <input
+                      value={startingHP}
+                      readOnly
+                      className="w-12 text-base text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                      type="number"
+                      required
+                      min="0"
+                      id="startingHP"
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="w-4/12 flex flex-col items-center text-center">
               <label
                 htmlFor="armorClass"
                 className="leading-7 text-base text-gray-600"
@@ -169,13 +277,30 @@ const AddCharacter = () => {
                 AC:
               </label>
               <input
-                className="w-1/2 bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-12 text-base text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
                 type="number"
                 required
                 min="0"
                 id="armorClass"
               />
-            </span>
+            </div>
+            <div className="w-4/12 flex flex-col items-center text-center">
+              <label
+                htmlFor="armorClass"
+                className="leading-7 text-base text-gray-600"
+              >
+                Initiative:
+              </label>
+              <input
+                value={startingInit}
+                onChange={(e) => setStartingInit(e.target.value)}
+                className="w-12 text-base text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                type="number"
+                required
+                min="0"
+                id="initiative"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -183,4 +308,4 @@ const AddCharacter = () => {
   );
 };
 
-export default AddCharacter;
+export default AddCharacterContainer;

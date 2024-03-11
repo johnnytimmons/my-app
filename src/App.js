@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import EnterStats from "./components/EnterStats";
 import SkillsList from "./components/SkillsList";
-import AddCharacter from "./components/AddCharacter";
+import AddCharacterContainer from "./components/AddCharacter";
 import Navbar from "./components/Navbar";
+
+//auth0 and firebase for backend
 
 const App = () => {
   const [baseValues, setBaseValues] = useState({
@@ -28,8 +30,9 @@ const App = () => {
   return (
     <div className="wholePage">
       <Navbar />
-      <AddCharacter />
-      <div className="m-5 bg-zinc-50 p-5 rounded-br-xl shadow-sm mb-1 text-center flex flex-col justify-center items-center">
+      <AddCharacterContainer baseValues={baseValues} />{" "}
+      {/* Use AddCharacterContainer instead of AddCharacter */}
+      <div className="m-4 mb-1 text-center flex flex-col justify-center items-center">
         <h2 className="w-full text-2xl font-bold text-[#4e3629] mb-4">
           Abilities
         </h2>

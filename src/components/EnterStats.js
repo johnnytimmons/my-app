@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { calculateModifier } from "../utils/calculateModifier";
 import generalRollDice from "../utils/generalRollDice";
+import classOptions from "../utils/classOptions";
 
 const EnterStats = ({ label, keyAbility, onChange }) => {
   const [value, setValue] = useState(10);
@@ -41,7 +42,7 @@ const EnterStats = ({ label, keyAbility, onChange }) => {
       <label className="text-1xl font-bold text-[#4e3629] w-auto">
         {label}:
         <input
-          className="itemInput"
+          className="itemInput w-1/2 h-1/3 text-3xl"
           type="number"
           value={value}
           onChange={handleChange}
