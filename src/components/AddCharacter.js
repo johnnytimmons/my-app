@@ -86,8 +86,8 @@ const AddCharacter = ({
 }) => {
   return (
     <>
-      <div id="wholePage">
-        <div className="container items-centered my-app">
+      <div id="wholePage ">
+        <div className="container items-centered my-app ">
           <form>
             <div className="text-center text-base justify-center" id="CVButton">
               <h2 className="w-full text-2xl font-bold text-[#4e3629]">
@@ -125,12 +125,12 @@ const AddCharacter = ({
                   id="characterLevel"
                 />
               </span>
-              <span className="w-2/3 flex flex-col text-center items-center">
+              <span className="w-1/3 flex flex-col text-center items-center">
                 <label
                   htmlFor="proficiency"
                   className="leading-7 text-base text-gray-600"
                 >
-                  Proficiency Bonus:
+                  Proficiency:
                 </label>
                 <input
                   className="itemInput w-12 bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
@@ -141,7 +141,7 @@ const AddCharacter = ({
                 />
               </span>
             </div>
-            <div className="flex flex-wrap flex-row items-center text-center text-base gap-2 justify-center">
+            <div className="flex flex-wrap flex-row items-center text-center text-base gap-4 justify-center mt-2 mb-4">
               <span className="w-12/24 flex flex-col text-center items-center">
                 <label
                   htmlFor="characterClass"
@@ -234,13 +234,13 @@ const AddCharacter = ({
                 <div className="buttonContainer flex flex-col items-start text-xs gap-1">
                   <button
                     onClick={onHeal}
-                    className="border-2 text-center w-full"
+                    className="text-xs border-2 text-white text-center w-full font-bold py-1  bg-lime-700"
                   >
                     Heal
                   </button>
                   <button
                     onClick={onDamage}
-                    className="border-2 text-center w-full px-2"
+                    className="text-xs border-2 text-white text-center w-full font-bold py-1 px-2 bg-lime-700"
                   >
                     Damage
                   </button>
@@ -249,25 +249,22 @@ const AddCharacter = ({
                   <input
                     value={currentHP}
                     readOnly
-                    className="w-12 text-base text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                    className="w-14 h-full text-2xl text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
                     type="number"
                     required
                     min="0"
                     id="hitPoints"
+                  />{" "}
+                  /
+                  <input
+                    value={startingHP}
+                    onChange={(e) => setStartingHP(e.target.value)}
+                    className="w-14 h-full text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-2xl outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
+                    type="number"
+                    required
+                    min="0"
+                    id="startingHP"
                   />
-                  <span className="ml-2 text-base text-gray-600">
-                    {" "}
-                    /
-                    <input
-                      value={startingHP}
-                      onChange={(e) => setStartingHP(e.target.value)}
-                      className="w-12 text-base text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
-                      type="number"
-                      required
-                      min="0"
-                      id="startingHP"
-                    />
-                  </span>
                 </div>
               </div>
             </div>

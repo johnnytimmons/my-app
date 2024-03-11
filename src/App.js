@@ -32,7 +32,7 @@ const App = () => {
       <Navbar />
       <AddCharacterContainer baseValues={baseValues} />{" "}
       {/* Use AddCharacterContainer instead of AddCharacter */}
-      <div className="m-4 mb-1 text-center flex flex-col justify-center items-center">
+      <div className="m-4 mb-4 text-center flex flex-col justify-center items-center">
         <h2 className="w-full text-2xl font-bold text-[#4e3629] mb-4">
           Abilities
         </h2>

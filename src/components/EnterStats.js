@@ -38,32 +38,32 @@ const EnterStats = ({ label, keyAbility, onChange }) => {
   };
 
   return (
-    <div className="abilitiesDiv items-center w-32">
+    <div className="abilitiesDiv items-center w-24 flex flex-col">
       <label className="text-1xl font-bold text-[#4e3629] w-auto">
-        {label}:
-        <input
-          className="itemInput w-1/2 h-1/3 text-3xl"
-          type="number"
-          value={value}
-          onChange={handleChange}
-          required
-          min="0"
-        />
+        {label}
       </label>
-      <div className="abilitiesClass">
-        <label className="labelDiv">
-          <span>
-            {label} check: {Math.floor((value - 10) / 2)}
-          </span>
-        </label>
-        <div>
-          <button onClick={handleRollDice}>Roll Dice</button>
+      <div className="flex flex-col w-full items-center gap-1">
+        <button
+          className="text-3xl w-2/3 border-2 text-white text-center font-bold py-1 outline rounded-sm bg-lime-700"
+          onClick={handleRollDice}
+        >
+          +{Math.floor((value - 10) / 2)}
+        </button>
+        {buttonClicked && (
+          <p>
+            {rolls.join(", ")} + {modifier} =<span>{totalResult}</span>
+          </p>
+        )}
+        <div className="w-2/3">
+          <input
+            className="itemInput w-full text-lg text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out font-bold"
+            type="number"
+            value={value}
+            onChange={handleChange}
+            required
+            min="0"
+          />
           {/* Conditionally render rolls */}
-          {buttonClicked && (
-            <p>
-              {rolls.join(", ")} + {modifier} =<span>{totalResult}</span>
-            </p>
-          )}
         </div>
       </div>
     </div>
