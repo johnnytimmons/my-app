@@ -63,6 +63,7 @@ const AddCharacterContainer = ({ baseValues }) => {
         currentHP={currentHP}
         startingInit={startingInit}
         setStartingInit={setStartingInit}
+        setStartingHP={setStartingHP}
         onClassChange={handleClassChange}
         onHeal={handleHeal}
         onDamage={handleDamage}
@@ -77,6 +78,7 @@ const AddCharacter = ({
   currentHP,
   startingInit,
   setStartingInit,
+  setStartingHP,
   baseValues,
   onClassChange,
   onHeal,
@@ -258,7 +260,7 @@ const AddCharacter = ({
                     /
                     <input
                       value={startingHP}
-                      readOnly
+                      onChange={(e) => setStartingHP(e.target.value)}
                       className="w-12 text-base text-center bg-white rounded border border-gray-300 focus:border-lime-800 focus:ring-2 focus:ring-lime-300 text-base outline-none text-gray-700 py-1 px-1 leading-8 transition-colors duration-200 ease-in-out"
                       type="number"
                       required
