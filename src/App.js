@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import EnterStats from "./components/EnterStats";
-import SkillsList from "./components/SkillsList";
 import AddCharacterContainer from "./components/AddCharacter";
 import Navbar from "./components/Navbar";
+import ActionSpellsRadio from "./components/ActionSpellsRadio";
 
 //auth0 and firebase for backend
 
@@ -84,6 +84,7 @@ const App = () => {
           />
         </div>
       </div>
+      <ActionSpellsRadio />
     </div>
   );
 };
