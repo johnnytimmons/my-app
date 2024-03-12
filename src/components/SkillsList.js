@@ -4,6 +4,12 @@ import EnterModifier from "./EnterModifier";
 const SkillsList = ({ baseValues = {}, handleStatChange }) => {
   return (
     <div>
+      <button
+        className="bg-[#4e3629] text-white text-sm font-bold py-1 px-1"
+        //onClick={handleReset}
+      >
+        Clear
+      </button>
       <EnterModifier
         label="Acrobatics"
         keyAbility="Dex"

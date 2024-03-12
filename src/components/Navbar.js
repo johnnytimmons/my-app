@@ -6,8 +6,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import MySwipeableDrawer from "./SwipeableDrawer"; // Import the SwipeableDrawer component
 import SignIn from "./Sign-In"; // Import the SignIn component
+import App from "../App";
 
-export default function ButtonNavBar({ baseValues, handleStatChange }) {
+export default function Navbar({ baseValues, handleStatChange }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
 

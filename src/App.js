@@ -25,11 +25,14 @@ const App = () => {
       [keyAbility]: newModifier,
     }));
   };
-  useEffect(() => {}, [baseValues]);
 
   return (
     <div className="wholePage">
-      <Navbar />
+      <Navbar
+        baseValues={baseValues}
+        setBaseValues={setBaseValues}
+        handleStatChange={handleStatChange}
+      />
       <AddCharacterContainer baseValues={baseValues} />{" "}
       {/* Use AddCharacterContainer instead of AddCharacter */}
       <div className="m-4 mb-4 text-center flex flex-col justify-center items-center">
@@ -38,31 +41,43 @@ const App = () => {
         </h2>
         <div className="flex flex-wrap gap-4 justify-center">
           <EnterStats
+            baseValues={baseValues}
+            setBaseValues={setBaseValues}
             label="Strength"
             keyAbility={"Str"}
             onChange={(newModifier) => handleStatChange("Str", newModifier)}
           />
           <EnterStats
+            baseValues={baseValues}
+            setBaseValues={setBaseValues}
             label="Dexterity"
             keyAbility={"Dex"}
             onChange={(newModifier) => handleStatChange("Dex", newModifier)}
           />
           <EnterStats
+            baseValues={baseValues}
+            setBaseValues={setBaseValues}
             label="Charisma"
             keyAbility={"Cha"}
             onChange={(newModifier) => handleStatChange("Cha", newModifier)}
           />
           <EnterStats
+            baseValues={baseValues}
+            setBaseValues={setBaseValues}
             label="Constitution"
             keyAbility={"Con"}
             onChange={(newModifier) => handleStatChange("Con", newModifier)}
           />
           <EnterStats
+            baseValues={baseValues}
+            setBaseValues={setBaseValues}
             label="Wisdom"
             keyAbility={"Wis"}
             onChange={(newModifier) => handleStatChange("Wis", newModifier)}
           />
           <EnterStats
+            baseValues={baseValues}
+            setBaseValues={setBaseValues}
             label="Intelligence"
             keyAbility={"Int"}
             onChange={(newModifier) => handleStatChange("Int", newModifier)}

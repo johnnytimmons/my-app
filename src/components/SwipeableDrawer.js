@@ -1,17 +1,8 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
+import { useState } from "react";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import SkillsList from "./SkillsList";
-
+//
 export default function MySwipeableDrawer({
   open,
   toggleDrawer,
@@ -19,8 +10,9 @@ export default function MySwipeableDrawer({
   handleStatChange,
 }) {
   const anchor = "left";
+  const [reset, setReset] = useState(false);
 
-  const handleToggleDrawer = (anchor, open) => (event) => {
+  const handleToggleDrawer = (open) => (event) => {
     if (
       event &&
       event.type === "keydown" &&
@@ -32,28 +24,44 @@ export default function MySwipeableDrawer({
     toggleDrawer(open);
   };
 
+  const handleDrawerClick = (event) => {
+    // Stop event propagation to prevent closing when clicking inside the drawer
+    event.stopPropagation();
+  };
+
+  const handleReset = () => {
+    setReset(!reset);
+  };
+
   const list = (anchor) => (
-    <Box
+    <div
+      className="abilitiesDiv items-center w-100 flex flex-col bg-[#eadcc0]"
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-      onClick={handleToggleDrawer(false)}
-      onKeyDown={handleToggleDrawer(false)}
+      onClick={handleDrawerClick}
+      onKeyDown={handleDrawerClick}
     >
-      <List>
-        <ListItem>
-          <ListItemText>
-            <h1 className="w-full text-2xl font-bold text-center text-[#4e3629] ">
-              SKILLS
-            </h1>
-          </ListItemText>
-        </ListItem>
+      <h1 className="w-full text-2xl font-bold text-center text-[#4e3629]">
+        SKILLS
+      </h1>
+
+      <div className="abilitiesDiv items-center w-full flex flex-col">
         <SkillsList
           baseValues={baseValues}
           handleStatChange={handleStatChange}
         />
-      </List>
-    </Box>
+      </div>
+    </div>
   );
+
+  const getDrawerWidth = () => {
+    // Set different widths based on viewport width
+    if (window.innerWidth < 600) {
+      return "45vw"; // Set the width for smaller screens
+    } else {
+      return "18vw"; // Set the width for larger screens
+    }
+  };
 
   return (
     <SwipeableDrawer
@@ -61,6 +69,11 @@ export default function MySwipeableDrawer({
       open={open}
       onClose={handleToggleDrawer(false)}
       onOpen={handleToggleDrawer(true)}
+      PaperProps={{
+        style: {
+          width: getDrawerWidth(),
+        },
+      }}
     >
       {list(anchor)}
     </SwipeableDrawer>
